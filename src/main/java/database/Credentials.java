@@ -12,13 +12,13 @@ import java.util.logging.*;
  *
  * @author Ryan
  */
-public class credentials {
+public class Credentials {
 
     public static Connection getConnection() throws SQLException {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(credentials.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Credentials.class.getName()).log(Level.SEVERE, null, ex);
         }
         String hostname = System.getenv("OPENSHIFT_MYSQL_DB_HOST");
         String portnum = System.getenv("OPENSHIFT_MYSQL_DB_PORT");

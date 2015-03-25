@@ -14,7 +14,7 @@ import javax.enterprise.context.SessionScoped;
  * @author Ryan
  */
 @SessionScoped
-public class forumBean implements Serializable {
+public class ForumBean implements Serializable {
     
     String username = "";
 

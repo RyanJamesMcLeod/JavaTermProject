@@ -5,8 +5,8 @@
  */
 package servlets;
 
-import beans.forumBean;
-import static database.credentials.getConnection;
+import beans.ForumBean;
+import static database.Credentials.getConnection;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,10 +33,10 @@ import javax.ws.rs.core.Response;
  */
 @Path("/forum")
 @SessionScoped
-public class forum implements Serializable{
+public class Forum implements Serializable{
     
     @EJB
-    forumBean login;
+    ForumBean login;
     
     @GET
     @Produces("application/json")
@@ -70,7 +70,7 @@ public class forum implements Serializable{
             conn.close();
             json = array.build();
         } catch (SQLException ex) {
-            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         return json;
     }
@@ -92,7 +92,7 @@ public class forum implements Serializable{
             conn.close();
             json = array.build();
         } catch (SQLException ex) {
-            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         return json;
     }
@@ -126,7 +126,7 @@ public class forum implements Serializable{
 //            conn.close();
 //            json = array.build();
 //        } catch (SQLException ex) {
-//            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //        return json;
 //    }

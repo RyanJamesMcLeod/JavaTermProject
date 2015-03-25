@@ -5,8 +5,8 @@
  */
 package servlets;
 
-import beans.forumBean;
-import static database.credentials.getConnection;
+import beans.ForumBean;
+import static database.Credentials.getConnection;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,10 +33,10 @@ import javax.ws.rs.core.Response;
  */
 @Path("/login")
 @SessionScoped
-public class login implements Serializable{
+public class Login implements Serializable{
     
     @EJB
-    forumBean login;
+    ForumBean login;
 
     @POST
     @Produces("application/json")
@@ -69,7 +69,7 @@ public class login implements Serializable{
             conn.close();
             json = array.build();
         } catch (SQLException ex) {
-            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         return json;
     }
