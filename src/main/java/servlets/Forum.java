@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
@@ -35,7 +36,7 @@ import javax.ws.rs.core.Response;
 @SessionScoped
 public class Forum implements Serializable{
     
-    @EJB
+    @Inject
     ForumBean login;
     
     @GET
