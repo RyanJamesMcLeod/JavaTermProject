@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Web Storm Forum</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                var getForum = function () {
+                    $.ajax({
+                        url: "./r/forum",
+                        method: "get",
+                        dataType: "json",
+                        contentType: 'application/json; charset=UTF-8',
+                        success: function () {
+                            $.getJSON("./r/forum", function (data) {
+                                $('#forum').html('');
+                                for (var i = 0; i < data.length; i++)
+                                    $('#forum').append("<h2>" + data[i].username + "</h2>" + "<h2>" +
+                                            data[i].date + "</h2>" + "<h2>" + data[i].information + "</h2>");
+                            });
+                        },
+                        error: function (jq, status, thrown) {
+                            alert(jq + "\n" + status + "\n" + thrown);
+                        }
+                    });
+                };
+                getForum();
+                var getChannel = function () {
+                    $.ajax({
+                        url: "./r/forum/channels",
+                        method: "get",
+                        dataType: "json",
+                        contentType: 'application/json; charset=UTF-8',
+                        success: function () {
+                            $.getJSON("./r/forum/channels", function (data) {
+                                $('#channelname').html('');
+                                $('#channelname').append("<h3>" + data[i].channel_name + "</h3>");
+                                $('#select').empty();
+                                for (var i = 0; i < data.length; i++)
+                                    $('#select').append('<option value="' + data[i].channel_name + '">' + data[i].channel_name + '</option>');
+                            });
+                        },
+                        error: function (jq, status, thrown) {
+                            alert(jq + "\n" + status + "\n" + thrown);
+                        }
+                    });
+                };
+                getChannel();
+            });
+        </script>
+    </head>
+    <body>
+        <div>Welcome to the Forums</div>
+        <div>Username: <div id="username"></div></div>
+        <div>Channel: <select id="select"></select></div>
+        <div id="channelname"></div>
+        <div>
+            <p><textarea id="text"></textarea></p>
+            <p><button id="submit">Submit</button></p>
+        </div>
+        <div id="forum"></div>
+    </body>
+</html>
