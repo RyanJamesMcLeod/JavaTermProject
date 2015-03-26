@@ -9,6 +9,7 @@ and open the template in the editor.
         <title>Term Forum</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/project.css">
         <script src="http://code.jquery.com/jquery.min.js"></script>
         <script>
             $(document).ready(function () {
@@ -20,9 +21,9 @@ and open the template in the editor.
                         contentType: 'application/json; charset=UTF-8',
                         success: function () {
                             $.getJSON("./r/forum", function (data) {
-                                $('#forum').html('');
+                                $('#myTable tbody').html('');
                                 for (var i = 0; i < data.length; i++)
-                                    $('#forum').append("<tr>" +
+                                    $('##myTable tbody').append("<tr>" +
                                         "<td>" + data[i].username + "</br>" + data[i].date + "</td><td>" + data[i].information + "</td><td>Edit</br>Delete</td></tr>");
                             });
                         },
@@ -86,8 +87,17 @@ and open the template in the editor.
             <p><textarea id="text"></textarea></p>
             <p><button id="submit">Submit</button></p>
         </div>
-        <table id="forum">
-            
+        <table id="myForum">
+            <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Post</th>
+                  <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
         </table>
     </body>
 </html>
