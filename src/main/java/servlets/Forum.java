@@ -52,6 +52,18 @@ public class Forum implements Serializable{
         return Response.ok(getChannels("SELECT * FROM channels")).build();
     }
     
+    @POST
+    @Produces("application/json")
+    @Consumes("application/json")
+    public Response postToForum(JsonObject json) {
+        JsonArray jsonArray = forumPost("INSERT INTO testchannel (username, date, information) VALUES (?, NOW(), ?)", login.getUsername(), json.getString("information"));
+        if (jsonArray.isEmpty())
+            return Response.status(500).build();
+        else {
+            return Response.ok(jsonArray).build();
+        }
+    }
+    
     public static JsonArray getResults(String sql, String... params) {
         JsonArray json = null;
         try {
@@ -89,6 +101,30 @@ public class Forum implements Serializable{
             while (rs.next()) {
                 array.add(Json.createObjectBuilder()
                         .add("channel_name", rs.getString("channel_name")));
+            }
+            conn.close();
+            json = array.build();
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return json;
+    }
+    
+    public static JsonArray forumPost(String sql, String... params) {
+        JsonArray json = null;
+        try {
+            JsonArrayBuilder array = Json.createArrayBuilder();
+            Connection conn = getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            for (int i = 0; i < params.length; i++) {
+                pstmt.setString(i + 1, params[i]);
+            }
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                array.add(Json.createObjectBuilder()
+                        .add("username", rs.getString("username"))
+                        .add("date", rs.getString("date"))
+                        .add("information", rs.getString("information")));
             }
             conn.close();
             json = array.build();

@@ -55,6 +55,24 @@ and open the template in the editor.
                     window.location.assign("http://termproject-ryanmcleod.rhcloud.com/index.html");
                 };
                 $('#logout').click(logout);
+                var forumPost = function () {
+                    $.ajax({
+                  url: "./r/forum",
+                  method: "post",
+                  data: JSON.stringify({
+                        "information": $('#text').val()
+                  }),
+                  dataType: "json",
+                  contentType: 'application/json; charset=UTF-8',
+                  success: function () {
+                      getForum();
+                  },
+                  error: function(jq, status, thrown) {
+                      alert (jq + "\n" + status + "\n" + thrown);
+                  }
+                     });
+                };
+                $('#submit').click(forumPost);
             });
         </script>
     </head>
