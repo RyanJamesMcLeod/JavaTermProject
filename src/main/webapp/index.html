@@ -28,17 +28,17 @@
 
           };
           $('#send').click(forumLogin);
-          
-          $('appear').click(function () {
+          $('#join').hide();
+          $('#appear').click(function () {
               var show = 'false';
               
               if (show === 'false') {
                   $('#join').show();
-                  show = true;
+                  show = 'true';
               }
               else {
                   $('#join').hide();
-                  show = false;
+                  show = 'false';
               }
           });
       });
