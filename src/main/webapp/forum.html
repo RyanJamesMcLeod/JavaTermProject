@@ -51,11 +51,15 @@ and open the template in the editor.
                     });
                 };
                 getChannel();
+                var logout = function () {
+                    window.location.assign("http://termproject-ryanmcleod.rhcloud.com/index.html");
+                };
+                $('#logout').click(logout);
             });
         </script>
     </head>
     <body>
-        <div>Welcome to the Forums</div>
+        <div>Welcome to the Forums<button id="logout">Logout</button></div>
         <div>Username: <div id="username"></div></div>
         <div>Channel: <select id="select"></select></div>
         <div id="channelname"></div>
