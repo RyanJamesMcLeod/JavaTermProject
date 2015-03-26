@@ -51,6 +51,19 @@ public class Login implements Serializable{
             return Response.ok(jsonArray).build();
         }
     }
+    
+    @POST
+    @Path("join")
+    @Produces("application/json")
+    @Consumes("application/json")
+    public Response joinForum(JsonObject json) {
+        int result = newUser("INSERT INTO users (username, password) VALUES (?, ?)", json.getString("username"), json.getString("password"));
+        if (result <= 0)
+            return Response.status(500).build();
+        else {
+            return Response.ok(json).build();
+        }
+    }
 
     public static JsonArray getResults(String sql, String... params) {
         JsonArray json = null;
@@ -73,5 +86,21 @@ public class Login implements Serializable{
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         return json;
+    }
+    
+    public static int newUser(String sql, String... params) {
+        int result = -1;
+        try {
+            Connection conn = getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            for (int i = 0; i < params.length; i++) {
+                pstmt.setString(i + 1, params[i]);
+            }
+            result = pstmt.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
 }
