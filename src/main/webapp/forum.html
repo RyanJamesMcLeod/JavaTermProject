@@ -23,7 +23,7 @@ and open the template in the editor.
                             $.getJSON("./r/forum", function (data) {
                                 $('#myTable tbody').html('');
                                 for (var i = 0; i < data.length; i++)
-                                    $('##myTable tbody').append("<tr>" +
+                                    $('#myTable tbody').append("<tr>" +
                                         "<td>" + data[i].username + "</br>" + data[i].date + "</td><td>" + data[i].information + "</td><td>Edit</br>Delete</td></tr>");
                             });
                         },
