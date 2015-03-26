@@ -8,6 +8,8 @@
   <script src="http://code.jquery.com/jquery.min.js"></script>
   <script>
       $(document).ready(function() {
+          var show = 'false';
+              
           var forumLogin = function() {
               $.ajax({
                   url: "./r/login",
@@ -30,7 +32,6 @@
           $('#send').click(forumLogin);
           $('#join').hide();
           $('#appear').click(function () {
-              var show = 'false';
               
               if (show === 'false') {
                   $('#join').show();
