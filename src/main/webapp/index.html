@@ -4,6 +4,7 @@
   <title>Welcome to the Term Project Forums!</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <link rel="stylesheet" type="text/css" href="css/project.css">
   <script src="http://code.jquery.com/jquery.min.js"></script>
   <script>
       $(document).ready(function() {
@@ -17,8 +18,7 @@
                   }),
                   dataType: "json",
                   contentType: 'application/json; charset=UTF-8',
-                  success: function (data) {
-                     //document.cookie="username="+$('#username').val();
+                  success: function () {
                      window.location.assign("http://termproject-ryanmcleod.rhcloud.com/forum.html");
                   },
                   error: function(jq, status, thrown) {
