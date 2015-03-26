@@ -13,6 +13,8 @@ and open the template in the editor.
         <script src="http://code.jquery.com/jquery.min.js"></script>
         <script>
             $(document).ready(function () {
+                var newChannelShow = 'false';
+                
                 var getForum = function () {
                     $.ajax({
                         url: "./r/forum",
@@ -73,13 +75,24 @@ and open the template in the editor.
                             getForum();
                         },
                         error: function (jq, status, thrown) {
-                            alert("this is where it gets to");
-                            //alert (jq + "\n" + status + "\n" + thrown);
+                            alert (jq + "\n" + status + "\n" + thrown);
                         }
                     });
                 };
                 $('#submit').click(forumPost);
        
+       $('#newChannel').hide();
+          $('#appear').click(function () {
+              
+              if (newChannelShow === 'false') {
+                  $('#newChannel').show();
+                  newChannelShow = 'true';
+              }
+              else {
+                  $('#newChannel').hide();
+                  newChannelShow = 'false';
+              }
+          });
 //                $("channelChange").click(function(){
 //                     $('#channelName').text($("#select :selected").text());
 //                });
@@ -93,6 +106,12 @@ and open the template in the editor.
         <div>Channel: <select id="select"></select></div>
         <div id="channelname">Test</div>
         <button id="channelChange">Change Channel</button>
+        <button id="appear">Want to create your own channel? Click here!</button>
+        <div id="newChannel">
+            <p>Enter the new Channel Name: <input id="newChannelName" /></p>
+            <p>What is the first post? <textarea id="firstPost"></textarea></p>
+            <p><button id="joinForum">Send</button></p>
+        </div>
         <div>
             <p><textarea id="text"></textarea></p>
             <p><button id="submit">Submit</button></p>
