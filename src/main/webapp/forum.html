@@ -21,13 +21,10 @@ and open the template in the editor.
                         contentType: 'application/json; charset=UTF-8',
                         success: function () {
                             $.getJSON("./r/forum", function (data) {
-                                $('#myTable tbody').html('');
-                                var content = '';
-                                for (var i = 0; i < data.length; i++){
-                                    content += '<tr></td>1</td></td>2</td></td>3</td></tr>';
-            //content += '<tr><td>' + data[i].username + '</br>' + data[i].date + '</td><td>' + data[i].information + '</td><td>Edit/Delete</td></tr>';
-                                } 
-                                $('#myTable tbody').append(content);
+                                $('#forum').html('');
+                                for (var i = 0; i < data.length; i++)
+                                    $('#forum').append("<h2>" + data[i].username + "</h2>" + "<h2>" +
+                                            data[i].date + "</h2>" + "<h2>" + data[i].information + "</h2>");
                             });
                         },
                         error: function (jq, status, thrown) {
@@ -61,21 +58,21 @@ and open the template in the editor.
                 $('#logout').click(logout);
                 var forumPost = function () {
                     $.ajax({
-                  url: "./r/forum",
-                  method: "post",
-                  data: JSON.stringify({
-                        "information": $('#text').val()
-                  }),
-                  dataType: "json",
-                  contentType: 'application/json; charset=UTF-8',
-                  success: function () {
-                      getForum();
-                  },
-                  error: function(jq, status, thrown) {
-                      alert ("this is where it gets to");
-                      //alert (jq + "\n" + status + "\n" + thrown);
-                  }
-                     });
+                        url: "./r/forum",
+                        method: "post",
+                        data: JSON.stringify({
+                            "information": $('#text').val()
+                        }),
+                        dataType: "json",
+                        contentType: 'application/json; charset=UTF-8',
+                        success: function () {
+                            getForum();
+                        },
+                        error: function (jq, status, thrown) {
+                            alert("this is where it gets to");
+                            //alert (jq + "\n" + status + "\n" + thrown);
+                        }
+                    });
                 };
                 $('#submit').click(forumPost);
             });
@@ -90,17 +87,6 @@ and open the template in the editor.
             <p><textarea id="text"></textarea></p>
             <p><button id="submit">Submit</button></p>
         </div>
-        <table id="myForum">
-            <thead>
-                <tr>
-                  <th>User</th>
-                  <th>Post</th>
-                  <th>Options</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-            </tbody>
-        </table>
+        <div id="forum"></div>
     </body>
 </html>
