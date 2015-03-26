@@ -47,7 +47,7 @@ public class Login implements Serializable{
         if (jsonArray.isEmpty())
             return Response.status(500).build();
         else {
-            
+            login.setUsername(json.getString("username"));
             return Response.ok(jsonArray).build();
         }
     }
