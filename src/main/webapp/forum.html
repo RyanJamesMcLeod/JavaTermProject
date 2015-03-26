@@ -22,9 +22,10 @@ and open the template in the editor.
                         success: function () {
                             $.getJSON("./r/forum", function (data) {
                                 $('#myTable tbody').html('');
+                                var content = '';
                                 for (var i = 0; i < data.length; i++)
-                                    $('#myTable tbody').append("<tr>" +
-                                        "<td>" + data[i].username + "</br>" + data[i].date + "</td><td>" + data[i].information + "</td><td>Edit</br>Delete</td></tr>");
+                                    content += '<tr><td>' + data[i].username + '</br>' + data[i].date + '</td><td>' + data[i].information + '</td><td>Edit/Delete</td></tr>';
+                                    $('#myTable tbody').append(content);
                             });
                         },
                         error: function (jq, status, thrown) {
