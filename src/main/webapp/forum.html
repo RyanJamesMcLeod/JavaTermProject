@@ -83,7 +83,7 @@ and open the template in the editor.
                 $("channelChange").click(function(){
                      var channelName = "";
                      channelName = $("#select :selected").text();
-                     $('#channelName').append(channelName);
+                     $('#channelName').text(channelName);
                 });
        
             });
@@ -93,7 +93,7 @@ and open the template in the editor.
         <div>Welcome to the Forums<button id="logout">Logout</button></div>
         <div>Username: <div id="username"></div></div>
         <div>Channel: <select id="select"></select></div>
-        <div id="channelname"></div><button id="channelChange">Change Channel</button>
+        <div id="channelname">Test</div><button id="channelChange">Change Channel</button>
         <div>
             <p><textarea id="text"></textarea></p>
             <p><button id="submit">Submit</button></p>
