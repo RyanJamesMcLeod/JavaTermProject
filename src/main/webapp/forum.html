@@ -22,8 +22,8 @@ and open the template in the editor.
                             $.getJSON("./r/forum", function (data) {
                                 $('#forum').html('');
                                 for (var i = 0; i < data.length; i++)
-                                    $('#forum').append("<h2>" + data[i].username + "</h2>" + "<h2>" +
-                                            data[i].date + "</h2>" + "<h2>" + data[i].information + "</h2>");
+                                    $('#forum').append("<tr>" +
+                                        "<td>" + data[i].username + "</br>" + data[i].date + "</td><td>" + data[i].information + "</td><td>Edit</br>Delete</td></tr>");
                             });
                         },
                         error: function (jq, status, thrown) {
@@ -86,6 +86,8 @@ and open the template in the editor.
             <p><textarea id="text"></textarea></p>
             <p><button id="submit">Submit</button></p>
         </div>
-        <div id="forum"></div>
+        <table id="forum">
+            
+        </table>
     </body>
 </html>
