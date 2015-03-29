@@ -42,7 +42,7 @@ public class Forum implements Serializable{
     @GET
     @Produces("application/json")
     public Response getAll() {
-        return Response.ok(getResults("SELECT * FROM testchannel")).build();
+        return Response.ok(getResults("SELECT * FROM ?", login.getChannelname())).build();
     }
     
     @GET
