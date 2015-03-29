@@ -16,6 +16,7 @@ import javax.enterprise.context.SessionScoped;
 public class ForumBean implements Serializable {
     
     String username = "";
+    String channelname = "testchannel";
 
     public String getUsername() {
         return username;
@@ -23,6 +24,14 @@ public class ForumBean implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getChannelname() {
+        return channelname;
+    }
+
+    public void setChannelname(String channelname) {
+        this.channelname = channelname;
     }
     
 }
