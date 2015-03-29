@@ -42,7 +42,8 @@ public class Forum implements Serializable{
     @GET
     @Produces("application/json")
     public Response getAll() {
-        return Response.ok(getResults("SELECT * FROM ?", login.getChannelname())).build();
+        String param = login.getChannelname();
+        return Response.ok(getResults("SELECT * FROM ?", param)).build();
     }
     
     @GET
