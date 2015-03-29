@@ -66,6 +66,22 @@ public class Forum implements Serializable{
         }
     }
     
+    @POST
+    @Path("newChannel")
+    @Produces("application/json")
+    @Consumes("application/json")
+    public Response createChannel(JsonObject json) {
+        String channelname = json.getString("channelname");
+        String SQLString = "CREATE TABLE " + channelname + " (channel_id INT PRIMARY KEY AUTO_INCREMENT, username VARCHAR(255), date DATETIME, information VARCHAR(255))";
+        int result = forumPost(SQLString);
+        if (result <= 0)
+            return Response.status(500).build();
+        else {
+            login.setChannelname(channelname);
+            return Response.ok(json).build();
+        }
+    }
+    
     public static JsonArray getResults(String sql, String... params) {
         JsonArray json = null;
         try {

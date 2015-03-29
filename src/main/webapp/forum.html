@@ -48,8 +48,9 @@ and open the template in the editor.
                         success: function () {
                             $.getJSON("./r/forum/channels", function (data) {
                                 $('#select').empty();
-                                for (var i = 0; i < data.length; i++)
+                                for (var i = 0; i < data.length; i++){
                                     $('#select').append('<option value="' + data[i].channel_name + '">' + data[i].channel_name + '</option>');
+                                }
                             });
                         },
                         error: function (jq, status, thrown) {
@@ -94,6 +95,26 @@ and open the template in the editor.
               }
           });
           
+          var newChannel = function () {
+                    $.ajax({
+                        url: "./r/forum/newChannel",
+                        method: "post",
+                        data: JSON.stringify({
+                            "channelname": $('#newChannelName').val()
+                        }),
+                        dataType: "json",
+                        contentType: 'application/json; charset=UTF-8',
+                        success: function () {
+                            getForum();
+                            getChannel();
+                        },
+                        error: function (jq, status, thrown) {
+                            alert (jq + "\n" + status + "\n" + thrown);
+                        }
+                    });
+                };
+                $('#newChannelConfirm').click(newChannel);
+          
           //New channel sending goes here
 //                $("channelChange").click(function(){
 //                     $('#channelName').text($("#select :selected").text());
@@ -111,8 +132,7 @@ and open the template in the editor.
         <button id="appear">Want to create your own channel? Click here!</button>
         <div id="newChannel">
             <p>Enter the new Channel Name: <input id="newChannelName" /></p>
-            <p>What is the first post? <textarea id="firstPost"></textarea></p>
-            <p><button id="joinForum">Send</button></p>
+            <p><button id="newChannelConfirm">Send</button></p>
         </div>
         <div>
             <p><textarea id="text"></textarea></p>
