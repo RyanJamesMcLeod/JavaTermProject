@@ -1,7 +1,7 @@
 body {
     background: #6e93c8;
     background: url("../images/GlowingAurora.jpg");
-    background-size: 100vw, 100vh;
+    background-size: 100%;
 }
 
 table {
