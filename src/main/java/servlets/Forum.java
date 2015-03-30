@@ -92,6 +92,15 @@ public class Forum implements Serializable {
             return Response.ok(json).build();
         }
     }
+    
+    @POST
+    @Path("switch")
+    @Produces("application/json")
+    @Consumes("application/json")
+    public Response switchChannels(JsonObject json) {
+        login.setChannelname(json.getString("channelname"));
+        return Response.ok(getChannels("SELECT * FROM channels")).build();
+    }
 
     public static JsonArray getResults(String sql, String... params) {
         JsonArray json = null;
@@ -162,7 +171,6 @@ public class Forum implements Serializable {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             result = pstmt.executeUpdate();
             conn.close();
-            System.out.println(sql);
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -116,9 +116,24 @@ and open the template in the editor.
                 $('#newChannelConfirm').click(newChannel);
           
           //New channel sending goes here
-//                $("channelChange").click(function(){
-//                     $('#channelName').text($("#select :selected").text());
-//                });
+                $("#select").change(function(){
+                     $.ajax({
+                        url: "./r/forum/switch",
+                        method: "post",
+                        data: JSON.stringify({
+                            "channelname": $('#select : selected').val()
+                        }),
+                        dataType: "json",
+                        contentType: 'application/json; charset=UTF-8',
+                        success: function () {
+                            getForum();
+                            getChannel();
+                        },
+                        error: function (jq, status, thrown) {
+                            alert (jq + "\n" + status + "\n" + thrown);
+                        }
+                    });
+                });
        
             });
         </script>
