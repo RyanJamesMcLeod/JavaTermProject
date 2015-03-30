@@ -34,11 +34,11 @@ import javax.ws.rs.core.Response;
  */
 @Path("/forum")
 @SessionScoped
-public class Forum implements Serializable{
-    
+public class Forum implements Serializable {
+
     @Inject
     ForumBean login;
-    
+
     @GET
     @Produces("application/json")
     public Response getAll() {
@@ -46,14 +46,14 @@ public class Forum implements Serializable{
         String SQLString = "SELECT * FROM " + param;
         return Response.ok(getResults(SQLString)).build();
     }
-    
+
     @GET
     @Path("channels")
     @Produces("application/json")
     public Response getAllChannels() {
         return Response.ok(getChannels("SELECT * FROM channels")).build();
     }
-    
+
     @POST
     @Produces("application/json")
     @Consumes("application/json")
@@ -62,13 +62,13 @@ public class Forum implements Serializable{
         String user = login.getUsername();
         String SQLString = "INSERT INTO " + param + "(username, date, information) VALUES ('" + user + "', NOW(), '" + json.getString("information") + "')";
         int result = forumPost(SQLString);
-        if (result <= 0)
+        if (result <= 0) {
             return Response.status(500).build();
-        else {
+        } else {
             return Response.ok(json).build();
         }
     }
-    
+
     @POST
     @Path("newChannel")
     @Produces("application/json")
@@ -81,20 +81,20 @@ public class Forum implements Serializable{
             login.setChannelname(channelname);
             SQLString = "CREATE TABLE " + channelname + " (channel_id INT PRIMARY KEY AUTO_INCREMENT, username VARCHAR(255), date DATETIME, information VARCHAR(255))";
             result = channelPost(SQLString);
-                if (result == 1) {
+            if (result == 1) {
                 String param = login.getChannelname();
                 String user = login.getUsername();
-                SQLString = "INSERT INTO " + param + "(username, date, information) VALUES ('" + user + "', NOW(), 'This is the first post')";
+                SQLString = "INSERT INTO " + param + " (username, date, information) VALUES (\"" + user + "\", NOW(),\"This is the first post\")";
                 result = channelPost(SQLString);
-                }
+            }
         }
-        if (result <= 0)
+        if (result <= 0) {
             return Response.status(500).build();
-        else {
+        } else {
             return Response.ok(json).build();
         }
     }
-    
+
     public static JsonArray getResults(String sql, String... params) {
         JsonArray json = null;
         try {
@@ -118,7 +118,7 @@ public class Forum implements Serializable{
         }
         return json;
     }
-    
+
     public static JsonArray getChannels(String sql, String... params) {
         JsonArray json = null;
         try {
@@ -140,7 +140,7 @@ public class Forum implements Serializable{
         }
         return json;
     }
-    
+
     public static int forumPost(String sql, String... params) {
         int result = -1;
         try {
@@ -156,8 +156,8 @@ public class Forum implements Serializable{
         }
         return result;
     }
-    
-    public static int channelPost(String sql, String... params) {
+
+    public static int channelPost(String sql) {
         int result = -1;
         try {
             Connection conn = getConnection();
