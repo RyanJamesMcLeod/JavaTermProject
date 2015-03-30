@@ -78,19 +78,19 @@ public class Forum implements Serializable{
         String SQLString = "INSERT INTO channels (channel_name) VALUES ('" + channelname + "')";
         int result = channelPost(SQLString);
         if (result == 1) {
+            login.setChannelname(channelname);
             SQLString = "CREATE TABLE " + channelname + " (channel_id INT PRIMARY KEY AUTO_INCREMENT, username VARCHAR(255), date DATETIME, information VARCHAR(255))";
             result = channelPost(SQLString);
-            if (result == 1) {
-            String param = login.getChannelname();
-            String user = login.getUsername();
-            SQLString = "INSERT INTO " + param + "(username, date, information) VALUES ('" + user + "', NOW(), 'This is the first post')";
-            result = channelPost(SQLString);
-            }
+                if (result == 1) {
+                String param = login.getChannelname();
+                String user = login.getUsername();
+                SQLString = "INSERT INTO " + param + "(username, date, information) VALUES ('" + user + "', NOW(), 'This is the first post')";
+                result = channelPost(SQLString);
+                }
         }
         if (result <= 0)
             return Response.status(500).build();
         else {
-            login.setChannelname(channelname);
             return Response.ok(json).build();
         }
     }
