@@ -78,7 +78,7 @@ public class Forum implements Serializable{
             return Response.status(500).build();
         else {
             SQLString = "INSERT INTO channels (channel_name) VALUES ('" + json.getString("channelname") + "')";
-            channelPost(SQLString);
+            result = channelPost(SQLString);
             login.setChannelname(json.getString("channelname"));
             return Response.ok(json).build();
         }
