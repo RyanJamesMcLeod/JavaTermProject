@@ -60,7 +60,7 @@ public class Forum implements Serializable{
     public Response postToForum(JsonObject json) {
         String param = login.getChannelname();
         String user = login.getUsername();
-        String SQLString = "INSERT INTO " + param + "(username, date, information) VALUES ('" + user + "', NOW(), 'This is the first post')";
+        String SQLString = "INSERT INTO " + param + "(username, date, information) VALUES ('" + user + "', NOW(), '" + json.getString("information") + "')";
         int result = forumPost(SQLString);
         if (result <= 0)
             return Response.status(500).build();
