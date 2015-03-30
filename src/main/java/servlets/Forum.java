@@ -85,7 +85,7 @@ public class Forum implements Serializable {
                 String param = login.getChannelname();
                 String user = login.getUsername();
                 SQLString = "INSERT INTO " + param + " (username, date, information) VALUES (\"" + user + "\", NOW(),\"This is the first post\")";
-                result = channelPost(SQLString);
+                result = forumPost(SQLString);
             }
         }
         if (result <= 0) {
