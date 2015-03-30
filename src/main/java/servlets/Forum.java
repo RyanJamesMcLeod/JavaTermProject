@@ -58,7 +58,10 @@ public class Forum implements Serializable{
     @Produces("application/json")
     @Consumes("application/json")
     public Response postToForum(JsonObject json) {
-        int result = forumPost("INSERT INTO testchannel (username, date, information) VALUES (?, NOW(), ?)", login.getUsername(), json.getString("information"));
+        String param = login.getChannelname();
+        String user = login.getUsername();
+        String SQLString = "INSERT INTO " + param + "(username, date, information) VALUES ('" + user + "', NOW(), 'This is the first post')";
+        int result = forumPost(SQLString);
         if (result <= 0)
             return Response.status(500).build();
         else {
@@ -77,6 +80,12 @@ public class Forum implements Serializable{
         if (result == 1) {
             SQLString = "CREATE TABLE " + channelname + " (channel_id INT PRIMARY KEY AUTO_INCREMENT, username VARCHAR(255), date DATETIME, information VARCHAR(255))";
             result = channelPost(SQLString);
+            if (result == 1) {
+            String param = login.getChannelname();
+            String user = login.getUsername();
+            SQLString = "INSERT INTO " + param + "(username, date, information) VALUES ('" + user + "', NOW(), 'This is the first post')";
+            result = channelPost(SQLString);
+            }
         }
         if (result <= 0)
             return Response.status(500).build();
