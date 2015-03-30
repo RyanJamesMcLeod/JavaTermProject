@@ -73,7 +73,7 @@ public class Forum implements Serializable{
     public Response createChannel(JsonObject json) {
         String channelname = json.getString("channelname");
         String SQLString = "CREATE TABLE " + channelname + " (channel_id INT PRIMARY KEY AUTO_INCREMENT, username VARCHAR(255), date DATETIME, information VARCHAR(255))";
-        int result = forumPost(SQLString);
+        int result = channelPost(SQLString);
         if (result <= 0)
             return Response.status(500).build();
         else {
@@ -136,6 +136,19 @@ public class Forum implements Serializable{
             for (int i = 0; i < params.length; i++) {
                 pstmt.setString(i + 1, params[i]);
             }
+            result = pstmt.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
+    public static int channelPost(String sql, String... params) {
+        int result = -1;
+        try {
+            Connection conn = getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
             result = pstmt.executeUpdate();
             conn.close();
         } catch (SQLException ex) {
