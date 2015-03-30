@@ -87,6 +87,7 @@ public class Forum implements Serializable {
                 SQLString = "INSERT INTO " + param + " (username, date, information) VALUES (\"" + user + "\", NOW(),\"This is the first post\")";
                 result = forumPost(SQLString);
             }
+            else System.out.println("CREATE TABLE DID NOT RETURN 1");
         }
         if (result <= 0) {
             return Response.status(500).build();
@@ -164,6 +165,7 @@ public class Forum implements Serializable {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             result = pstmt.executeUpdate();
             conn.close();
+            System.out.println(sql);
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
