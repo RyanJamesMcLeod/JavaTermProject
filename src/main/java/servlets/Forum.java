@@ -72,10 +72,10 @@ public class Forum implements Serializable{
     @Consumes("application/json")
     public Response createChannel(JsonObject json) {
         String channelname = json.getString("channelname");
-        String SQLString = "CREATE TABLE " + channelname + " (channel_id INT PRIMARY KEY AUTO_INCREMENT, username VARCHAR(255), date DATETIME, information VARCHAR(255))";
+        String SQLString = "INSERT INTO channels (channel_name) VALUES ('" + channelname + "')";
         int result = channelPost(SQLString);
         if (result == 1) {
-            SQLString = "INSERT INTO channels (channel_name) VALUES ('" + channelname + "')";
+            SQLString = "CREATE TABLE " + channelname + " (channel_id INT PRIMARY KEY AUTO_INCREMENT, username VARCHAR(255), date DATETIME, information VARCHAR(255))";
             result = channelPost(SQLString);
         }
         if (result <= 0)
