@@ -140,22 +140,28 @@ and open the template in the editor.
         </script>
     </head>
     <body>
-        <div>Welcome to the Forums<button id="logout">Logout</button></div>
-        <div>Username: <div id="username"></div></div>
-        <div>Channel: <select id="select"></select></div>
-        <div id="channelname">Test</div>
-        <button id="channelChange">Change Channel</button>
-        <button id="appear">Want to create your own channel? Click here!</button>
-        
-        <div id="newChannel">
-            <p>Enter the new Channel Name: <input id="newChannelName" /></p>
-            <p><button id="newChannelConfirm">Send</button></p>
+        <div class="outline">
+            <div>Welcome to the Forums</div>
+            <button id="logout">Logout</button>
+            <div>Channel: <select id="select"></select>   <button id="channelChange">Change Channel</button></div>
         </div>
         
-        <div>
-            <p><textarea id="text"></textarea></p>
-            <p><button id="submit">Submit</button></p>
+        <div class="outline">
+            <button id="appear">Want to create your own channel? Click here!</button>
+            <div id="newChannel">
+                <p>Enter the new Channel Name: <input id="newChannelName" /></p>
+                <p><button id="newChannelConfirm">Send</button></p>
+            </div>
         </div>
-        <div id="forum"></div>
+        
+        <div class="outline">
+            <div>
+                <p><textarea id="text"></textarea></p>
+                <p><button id="submit">Submit</button></p>
+            </div>
+            <div id="channelname">Test</div>
+            <div id="forum"></div>
+        </div>
+        
     </body>
 </html>
