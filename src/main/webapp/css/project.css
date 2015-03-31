@@ -9,11 +9,12 @@ body {
 
 table {
     border: 1px solid black;
+    width: 95%;
 }
 
 .outline {
     border: 1px solid black;
-    width: 60%;
+    width: 65%;
     margin-left: auto;
     margin-right: auto;
     -webkit-border-radius: 10px;
@@ -21,4 +22,5 @@ table {
     border-radius: 10px;
     margin-top: 1em;
     padding: 0.5em 0;
+    background-color: rgb(249,232,204);
 }
