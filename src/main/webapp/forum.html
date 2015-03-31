@@ -25,9 +25,9 @@ and open the template in the editor.
                             $.getJSON("./r/forum", function (data) {
                                 $('#forum').html('');
                                 var content = '';
-                                content += "<table><thead><tr><th>User</th><th>Post</th><th>Information</th></tr></thead><tbody>";
+                                content += "<table><thead><tr><th>User</th><th colspan='2'>Post</th><th>Information</th></tr></thead><tbody>";
                                 for (var i = 0; i < data.length; i++){
-                                    content += "<tr><td>" + data[i].username + "</br>" + data[i].date + "</td><td>" + data[i].information + "</td><td>Edit/Delete</td></tr>";
+                                    content += "<tr><td>" + data[i].username + "</br>" + data[i].date + "</td><td colspan='2'>" + data[i].information + "</td><td>Edit/Delete</td></tr>";
                                 }
                                 content += "</tbody></table>";
                                     $('#forum').append(content);
@@ -51,8 +51,7 @@ and open the template in the editor.
                                 for (var i = 0; i < data.length; i++){
                                     $('#select').append('<option value="' + data[i].channel_name + '">' + data[i].channel_name + '</option>');
                                 }
-                                $('#channelname').html('');
-                                $('#channelname').text('#select option:selected')
+                                
                             });
                         },
                         error: function (jq, status, thrown) {
@@ -107,6 +106,9 @@ and open the template in the editor.
                         dataType: "json",
                         contentType: 'application/json; charset=UTF-8',
                         success: function () {
+                            $('#channelname').html('');
+                            var text = ("#newChannelConfirm").val();
+                            $('#channelname').append(text);
                             getForum();
                             getChannel();
                         },
@@ -128,6 +130,9 @@ and open the template in the editor.
                         dataType: "json",
                         contentType: 'application/json; charset=UTF-8',
                         success: function () {
+                            $('#channelname').html('');
+                            var text = ("#select option:selected").text();
+                            $('#channelname').append(text);
                             getForum();
                             getChannel();
                         },
@@ -161,7 +166,7 @@ and open the template in the editor.
                 <p><textarea id="text"></textarea></p>
                 <p><button id="submit">Submit</button></p>
             </div>
-            <div id="channelname">Test</div>
+            <div id="channelname">testchannel</div>
             
                 <div id="forum"></div>
             
