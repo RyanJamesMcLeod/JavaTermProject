@@ -142,27 +142,27 @@ and open the template in the editor.
     </head>
     <body>
         <div class="outline">
-            <div>Welcome to the Forums</div>
-            <button id="logout">Logout</button>
-            <div>Channel: <select id="select"></select>   <button id="channelChange">Change Channel</button></div>
+            <h1 class="center">Welcome to the Forums</h1>
+            <div class="center"><button id="logout">Logout</button></div>
+            <div class="center">Channel: <select id="select"></select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="channelChange">Change to this Channel</button></div>
         </div>
         
         <div class="outline">
-            <button id="appear">Want to create your own channel? Click here!</button>
-            <div id="newChannel">
+            <button id="appear" class="center">Want to create your own channel? Click here!</button>
+            <div id="newChannel" class="center">
                 <p>Enter the new Channel Name: <input id="newChannelName" /></p>
-                <p><button id="newChannelConfirm">Send</button></p>
+                <p><button id="newChannelConfirm">Create your new Channel!</button></p>
             </div>
         </div>
         
-        <div class="outline">
+        <div class="outline center">
             <div>
                 <p><textarea id="text"></textarea></p>
                 <p><button id="submit">Submit</button></p>
             </div>
             <div id="channelname">testchannel</div>
             
-                <div id="forum"></div>
+            <div id="forum"></div>
             
         </div>
         
