@@ -51,6 +51,8 @@ and open the template in the editor.
                                 for (var i = 0; i < data.length; i++){
                                     $('#select').append('<option value="' + data[i].channel_name + '">' + data[i].channel_name + '</option>');
                                 }
+                                $('#channelname').html('');
+                                $('#channelname').text('#select option:selected')
                             });
                         },
                         error: function (jq, status, thrown) {
@@ -160,9 +162,9 @@ and open the template in the editor.
                 <p><button id="submit">Submit</button></p>
             </div>
             <div id="channelname">Test</div>
-            <div class="center">
+            
                 <div id="forum"></div>
-            </div>
+            
         </div>
         
     </body>
