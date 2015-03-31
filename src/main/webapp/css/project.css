@@ -18,6 +18,10 @@ table {
     text-align: center;
 }
 
+#logout {
+    margin-bottom: 1em;
+}
+
 .outline {
     border: 1px solid black;
     width: 65%;
