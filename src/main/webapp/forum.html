@@ -106,9 +106,7 @@ and open the template in the editor.
                         dataType: "json",
                         contentType: 'application/json; charset=UTF-8',
                         success: function () {
-                            $('#channelname').html('');
-                            var text = ("#newChannelConfirm").val();
-                            $('#channelname').append(text);
+                            
                             getForum();
                             getChannel();
                         },
@@ -130,9 +128,7 @@ and open the template in the editor.
                         dataType: "json",
                         contentType: 'application/json; charset=UTF-8',
                         success: function () {
-                            $('#channelname').html('');
-                            var text = ("#select option:selected").text();
-                            $('#channelname').append(text);
+                           
                             getForum();
                             getChannel();
                         },
