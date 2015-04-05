@@ -27,7 +27,7 @@ and open the template in the editor.
                                 var content = '';
                                 content += "<table><thead><tr><th>User</th><th colspan='2'>Post</th><th>Information</th></tr></thead><tbody>";
                                 for (var i = 0; i < data.length; i++){
-                                    content += "<tr><td>" + data[i].channel_id + data[i].username + "</br>" + data[i].date + "</td><td colspan='2'>" + data[i].information + "</td><td>Edit/Delete</td></tr>";
+                                    content += "<tr id ='" + data[i].channel_id + "'><td>" + data[i].username + "</br>" + data[i].date + "</td><td colspan='2'>" + data[i].information + "</td><td>Edit/Delete</td></tr>";
                                 }
                                 content += "</tbody></table>";
                                     $('#forum').append(content);
