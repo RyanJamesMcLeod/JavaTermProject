@@ -14,7 +14,7 @@ and open the template in the editor.
         <script>
             $(document).ready(function () {
                 var newChannelShow = 'false';
-                
+
                 var getForum = function () {
                     $.ajax({
                         url: "./r/forum",
@@ -26,11 +26,11 @@ and open the template in the editor.
                                 $('#forum').html('');
                                 var content = '';
                                 content += "<table><thead><tr><th>User</th><th colspan='2'>Post</th><th>Information</th></tr></thead><tbody>";
-                                for (var i = 0; i < data.length; i++){
-                                    content += "<tr id ='" + data[i].channel_id + "'><td>" + data[i].username + "</br>" + data[i].date + "</td><td colspan='2'>" + data[i].information + "</td><td>Edit/Delete</td></tr>";
+                                for (var i = 0; i < data.length; i++) {
+                                    content += "<tr id ='" + data[i].channel_id + "'><td>" + data[i].username + "</br>" + data[i].date + "</td><td colspan='2'>" + data[i].information + "</td><td><button class='button_delete'>Delete</button></td></tr>";
                                 }
                                 content += "</tbody></table>";
-                                    $('#forum').append(content);
+                                $('#forum').append(content);
                             });
                         },
                         error: function (jq, status, thrown) {
@@ -48,10 +48,10 @@ and open the template in the editor.
                         success: function () {
                             $.getJSON("./r/forum/channels", function (data) {
                                 $('#select').empty();
-                                for (var i = 0; i < data.length; i++){
+                                for (var i = 0; i < data.length; i++) {
                                     $('#select').append('<option value="' + data[i].channel_name + '">' + data[i].channel_name + '</option>');
                                 }
-                                
+
                             });
                         },
                         error: function (jq, status, thrown) {
@@ -77,26 +77,26 @@ and open the template in the editor.
                             getForum();
                         },
                         error: function (jq, status, thrown) {
-                            alert ("Error Thrown");
+                            alert("Error Thrown");
                         }
                     });
                 };
                 $('#submit').click(forumPost);
-       
-       $('#newChannel').hide();
-          $('#appear').click(function () {
-              
-              if (newChannelShow === 'false') {
-                  $('#newChannel').show();
-                  newChannelShow = 'true';
-              }
-              else {
-                  $('#newChannel').hide();
-                  newChannelShow = 'false';
-              }
-          });
-          
-          var newChannel = function () {
+
+                $('#newChannel').hide();
+                $('#appear').click(function () {
+
+                    if (newChannelShow === 'false') {
+                        $('#newChannel').show();
+                        newChannelShow = 'true';
+                    }
+                    else {
+                        $('#newChannel').hide();
+                        newChannelShow = 'false';
+                    }
+                });
+
+                var newChannel = function () {
                     $.ajax({
                         url: "./r/forum/newChannel",
                         method: "post",
@@ -110,13 +110,13 @@ and open the template in the editor.
                             getChannel();
                         },
                         error: function (jq, status, thrown) {
-                            alert (jq + "\n" + status + "\n" + thrown);
+                            alert(jq + "\n" + status + "\n" + thrown);
                         }
                     });
                 };
                 $('#newChannelConfirm').click(newChannel);
-          
-          //New channel sending goes here
+
+                //New channel sending goes here
                 var switchChannel = function () {
                     $.ajax({
                         url: "./r/forum/switch",
@@ -131,12 +131,17 @@ and open the template in the editor.
                             getChannel();
                         },
                         error: function (jq, status, thrown) {
-                            alert (jq + "\n" + status + "\n" + thrown);
+                            alert(jq + "\n" + status + "\n" + thrown);
                         }
                     });
                 };
-                 $('#channelChange').click(switchChannel);
-       
+                $('#channelChange').click(switchChannel);
+
+                $(".button_delete").live('click', function (event) {
+                    var rowID = $(this).parent().parent().attr('id');
+                    alert(rowID);
+                });
+
             });
         </script>
     </head>
@@ -146,7 +151,7 @@ and open the template in the editor.
             <div class="center"><button id="logout">Logout</button></div>
             <div class="center">Channel: <select id="select"></select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="channelChange">Change to this Channel</button></div>
         </div>
-        
+
         <div class="outline">
             <div class="center"><button id="appear">Want to create your own channel? Click here!</button></div>
             <div id="newChannel" class="center">
@@ -154,17 +159,17 @@ and open the template in the editor.
                 <p><button id="newChannelConfirm">Create your new Channel!</button></p>
             </div>
         </div>
-        
+
         <div class="outline center">
             <div>
                 <p><textarea id="text"></textarea></p>
                 <p><button id="submit">Submit</button></p>
             </div>
             <div id="channelname">testchannel</div>
-            
+
             <div id="forum"></div>
-            
+
         </div>
-        
+
     </body>
 </html>
