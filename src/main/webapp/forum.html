@@ -27,7 +27,7 @@ and open the template in the editor.
                                 var content = '';
                                 content += "<table><thead><tr><th>User</th><th colspan='2'>Post</th><th>Information</th></tr></thead><tbody>";
                                 for (var i = 0; i < data.length; i++) {
-                                    content += "<tr id ='" + data[i].channel_id + "'><td>" + data[i].username + "</br>" + data[i].date + "</td><td colspan='2'>" + data[i].information + "</td><td><button class='button_delete'>Delete</button></td></tr>";
+                                    content += "<tr id ='" + data[i].channel_id + "'><td>" + data[i].username + "</br>" + data[i].date + "</td><td colspan='2'>" + data[i].information + "</td><td><button class='buttonDelete'>Delete</button></td></tr>";
                                 }
                                 content += "</tbody></table>";
                                 $('#forum').append(content);
@@ -137,16 +137,20 @@ and open the template in the editor.
                 };
                 $('#channelChange').click(switchChannel);
 
-                var deleteTest = function() {
-                    var rowID = $(this).parent().parent().attr('id');
-                    if (rowID > 0) {
-                        alert(rowID);
-                    }
-                    else {
-                        alert("not working");
-                    }
-                };
-                $(".button_delete").click(deleteTest);
+//                var deleteTest = function() {
+//                    var rowID = $(this).parent().parent().attr('id');
+//                    if (rowID > 0) {
+//                        alert(rowID);
+//                    }
+//                    else {
+//                        alert("not working");
+//                    }
+//                };
+//                $(".button_delete").click(deleteTest);
+
+                $(".buttonDelete").click(function() {
+                   alert("It works"); 
+                });
 
             });
         </script>
