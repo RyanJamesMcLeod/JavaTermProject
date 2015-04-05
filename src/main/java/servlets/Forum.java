@@ -114,6 +114,7 @@ public class Forum implements Serializable {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 array.add(Json.createObjectBuilder()
+                        .add("id", rs.getInt("channel_id"))
                         .add("username", rs.getString("username"))
                         .add("date", rs.getString("date"))
                         .add("information", rs.getString("information")));
