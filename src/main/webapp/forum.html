@@ -137,7 +137,7 @@ and open the template in the editor.
                 };
                 $('#channelChange').click(switchChannel);
 
-                $(".button_delete").live('click', function (event) {
+                $(".button_delete").click(function () {
                     var rowID = $(this).parent().parent().attr('id');
                     alert(rowID);
                 });
