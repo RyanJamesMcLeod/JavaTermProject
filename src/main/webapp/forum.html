@@ -14,12 +14,11 @@ and open the template in the editor.
         <script>
             $(document).ready(function () {
                 var newChannelShow = 'false';
-                
-                function buttonDelete() {
-                      alert("it works");
-                  }
 
                 var getForum = function () {
+                    function buttonDelete() {
+                      alert("it works");
+                    }
                     $.ajax({
                         url: "./r/forum",
                         method: "get",
