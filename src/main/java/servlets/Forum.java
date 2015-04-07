@@ -130,17 +130,18 @@ public class Forum implements Serializable {
     
     @DELETE
     @Path("{id}")
-    public Response deleteEntry(@PathParam("id") int id) {
-        
-        String param = login.getChannelname();
-        String SQLString = "DELETE FROM" + param + "WHERE channel_id = " + id;
-        int result = channelPost(SQLString);
-        
-        if (result <= 0) {
-            return Response.status(500).build();
-        } else {
-            return Response.ok().build();
+    public Response delete(@PathParam("id") int id) {
+        try {
+            String param = login.getChannelname();
+            Connection conn = getConnection();
+            PreparedStatement pstmt = conn.prepareStatement("DELETE FROM ? WHERE channel_id=?");
+            pstmt.setString(1, param);
+            pstmt.setInt(2, id);
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Forum.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return Response.ok().build();
     }
 
     public static JsonArray getChannels(String sql, String... params) {
