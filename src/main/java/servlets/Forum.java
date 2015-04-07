@@ -134,9 +134,8 @@ public class Forum implements Serializable {
         try {
             String param = login.getChannelname();
             Connection conn = getConnection();
-            PreparedStatement pstmt = conn.prepareStatement("DELETE FROM ? WHERE channel_id=?");
-            pstmt.setString(1, param);
-            pstmt.setInt(2, id);
+            PreparedStatement pstmt = conn.prepareStatement("DELETE FROM " + param + " WHERE channel_id=?");
+            pstmt.setInt(1, id);
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(Forum.class.getName()).log(Level.SEVERE, null, ex);
