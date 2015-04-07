@@ -160,10 +160,19 @@ and open the template in the editor.
             });
             
             function buttonDelete(id) {
-               var rowID = id;
-                    
-                        alert(rowID);
-                    
+                 $.ajax({
+                    url: "./r/forum/" + id,
+                    dataType: "json",
+                    contentType: 'application/json; charset=UTF-8',                        
+                    method: "delete",
+                    success: function () {
+                            getForum();
+                            getChannel();
+                        },
+                    error: function (jq, status, thrown) {
+                            alert(jq + "\n" + status + "\n" + thrown);
+                    }
+                });
             }
         </script>
     </head>

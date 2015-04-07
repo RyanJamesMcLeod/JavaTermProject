@@ -22,9 +22,11 @@ import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
@@ -80,7 +82,6 @@ public class Forum implements Serializable {
         if (result == 1) {
             login.setChannelname(channelname);
             SQLString = "CREATE TABLE " + channelname + " (channel_id INT PRIMARY KEY AUTO_INCREMENT, username VARCHAR(255), date DATETIME, information VARCHAR(255))";
-            result = channelPost(SQLString);
             String param = login.getChannelname();
             String user = login.getUsername();
             SQLString = "INSERT INTO " + param + " (username, date, information) VALUES (\"" + user + "\", NOW(),\"This is the first post\")";
@@ -125,6 +126,21 @@ public class Forum implements Serializable {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         return json;
+    }
+    
+    @DELETE
+    @Path("{id}")
+    public Response deleteEntry(@PathParam("id") int id) {
+        
+        String param = login.getChannelname();
+        String SQLString = "DELETE FROM" + param + "WHERE channel_id=" + id;
+        int result = channelPost(SQLString);
+        
+        if (result <= 0) {
+            return Response.status(500).build();
+        } else {
+            return Response.ok().build();
+        }
     }
 
     public static JsonArray getChannels(String sql, String... params) {
