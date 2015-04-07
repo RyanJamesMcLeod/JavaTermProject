@@ -165,7 +165,7 @@ and open the template in the editor.
                     dataType: "json",
                     contentType: 'application/json; charset=UTF-8',                        
                     method: "delete",
-                    success: function () {
+                    complete: function () {
                             getForum();
                             getChannel();
                         },
