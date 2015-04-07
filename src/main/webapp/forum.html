@@ -30,7 +30,7 @@ and open the template in the editor.
                                 var content = '';
                                 content += "<table><thead><tr><th>User</th><th colspan='2'>Post</th><th>Information</th></tr></thead><tbody>";
                                 for (var i = 0; i < data.length; i++) {
-                                    content += "<tr id ='" + data[i].channel_id + "'><td>" + data[i].username + "</br>" + data[i].date + "</td><td colspan='2'>" + data[i].information + "</td><td><button class='buttonDelete' onClick='buttonDelete('" + data[i].channel_id + "')>Delete</button></td></tr>";
+                                    content += "<tr id ='" + data[i].channel_id + "'><td>" + data[i].username + "</br>" + data[i].date + "</td><td colspan='2'>" + data[i].information + "</td><td><button class='buttonDelete' onClick='buttonDelete('" + data[i].channel_id + "')'>Delete</button></td></tr>";
                                 }
                                 content += "</tbody></table>";
                                 $('#forum').append(content);
@@ -161,7 +161,8 @@ and open the template in the editor.
             
             function buttonDelete(id) {
                var rowID = id;
-                    alert(rowID);
+                    
+                        alert(rowID);
                     
             }
         </script>
