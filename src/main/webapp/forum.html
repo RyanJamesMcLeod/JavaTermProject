@@ -160,13 +160,10 @@ and open the template in the editor.
             });
             
             function buttonDelete() {
-               var rowID = $(this).closest('tr').attr('id');
-                    if (rowID > 0) {
+               var rowID = $(this).parent('td').parent('tr').attr('id');
+                    
                         alert(rowID);
-                    }
-                    else {
-                        alert("not working");
-                    }
+                    
             }
         </script>
     </head>
