@@ -133,7 +133,7 @@ public class Forum implements Serializable {
     public Response deleteEntry(@PathParam("id") int id) {
         
         String param = login.getChannelname();
-        String SQLString = "DELETE FROM" + param + "WHERE channel_id=" + id;
+        String SQLString = "DELETE FROM" + param + "WHERE channel_id = " + id;
         int result = channelPost(SQLString);
         
         if (result <= 0) {
