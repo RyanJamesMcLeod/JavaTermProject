@@ -160,7 +160,13 @@ and open the template in the editor.
             });
             
             function buttonDelete() {
-               alert("it works");
+               var rowID = $(this).parent().parent().attr('id');
+                    if (rowID > 0) {
+                        alert(rowID);
+                    }
+                    else {
+                        alert("not working");
+                    }
             }
         </script>
     </head>
