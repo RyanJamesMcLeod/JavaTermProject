@@ -11,57 +11,58 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/project.css">
         <script src="http://code.jquery.com/jquery.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                var newChannelShow = 'false';
-
-                var getForum = function () {
+        <script>var getForum = function () {
 //                    function buttonDelete() {
 //                      alert("it works");
 //                    }
-                    $.ajax({
-                        url: "./r/forum",
-                        method: "get",
-                        dataType: "json",
-                        contentType: 'application/json; charset=UTF-8',
-                        success: function () {
-                            $.getJSON("./r/forum", function (data) {
-                                $('#forum').html('');
-                                var content = '';
-                                content += "<table><thead><tr><th>User</th><th colspan='2'>Post</th><th>Information</th></tr></thead><tbody>";
-                                for (var i = 0; i < data.length; i++) {
-                                    content += "<tr id ='" + data[i].channel_id + "'><td>" + data[i].username + "</br>" + data[i].date + "</td><td colspan='2'>" + data[i].information + "</td><td><button class='buttonDelete' onClick=buttonDelete('" + data[i].channel_id + "')>Delete</button></td></tr>";
-                                }
-                                content += "</tbody></table>";
-                                $('#forum').append(content);
-                            });
-                        },
-                        error: function (jq, status, thrown) {
-                            alert(jq + "\n" + status + "\n" + thrown);
-                        }
-                    });
-                };
-                getForum();
-                var getChannel = function () {
-                    $.ajax({
-                        url: "./r/forum/channels",
-                        method: "get",
-                        dataType: "json",
-                        contentType: 'application/json; charset=UTF-8',
-                        success: function () {
-                            $.getJSON("./r/forum/channels", function (data) {
-                                $('#select').empty();
-                                for (var i = 0; i < data.length; i++) {
-                                    $('#select').append('<option value="' + data[i].channel_name + '">' + data[i].channel_name + '</option>');
-                                }
+                $.ajax({
+                    url: "./r/forum",
+                    method: "get",
+                    dataType: "json",
+                    contentType: 'application/json; charset=UTF-8',
+                    success: function () {
+                        $.getJSON("./r/forum", function (data) {
+                            $('#forum').html('');
+                            var content = '';
+                            content += "<table><thead><tr><th>User</th><th colspan='2'>Post</th><th>Information</th></tr></thead><tbody>";
+                            for (var i = 0; i < data.length; i++) {
+                                content += "<tr id ='" + data[i].channel_id + "'><td>" + data[i].username + "</br>" + data[i].date + "</td><td colspan='2'>" + data[i].information + "</td><td><button class='buttonDelete' onClick=buttonDelete('" + data[i].channel_id + "')>Delete</button></td></tr>";
+                            }
+                            content += "</tbody></table>";
+                            $('#forum').append(content);
+                        });
+                    },
+                    error: function (jq, status, thrown) {
+                        alert(jq + "\n" + status + "\n" + thrown);
+                    }
+                });
+            };
+            var getChannel = function () {
+                $.ajax({
+                    url: "./r/forum/channels",
+                    method: "get",
+                    dataType: "json",
+                    contentType: 'application/json; charset=UTF-8',
+                    success: function () {
+                        $.getJSON("./r/forum/channels", function (data) {
+                            $('#select').empty();
+                            for (var i = 0; i < data.length; i++) {
+                                $('#select').append('<option value="' + data[i].channel_name + '">' + data[i].channel_name + '</option>');
+                            }
 
-                            });
-                        },
-                        error: function (jq, status, thrown) {
-                            alert(jq + "\n" + status + "\n" + thrown);
-                        }
-                    });
-                };
+                        });
+                    },
+                    error: function (jq, status, thrown) {
+                        alert(jq + "\n" + status + "\n" + thrown);
+                    }
+                });
+            };
+            $(document).ready(function () {
+                var newChannelShow = 'false';
+
+
+                getForum();
+
                 getChannel();
                 var logout = function () {
                     window.location.assign("http://termproject-ryanmcleod.rhcloud.com/index.html");
@@ -155,22 +156,22 @@ and open the template in the editor.
 //                   alert("It works"); 
 //                });
 
-                  
+
 
             });
-            
+
             function buttonDelete(id) {
-                 $.ajax({
+                $.ajax({
                     url: "./r/forum/" + id,
                     dataType: "json",
-                    contentType: 'application/json; charset=UTF-8',                        
+                    contentType: 'application/json; charset=UTF-8',
                     method: "delete",
                     complete: function () {
-                            getForum();
-                            getChannel();
-                        },
+                        getForum();
+                        getChannel();
+                    },
                     error: function (jq, status, thrown) {
-                            alert(jq + "\n" + status + "\n" + thrown);
+                        alert(jq + "\n" + status + "\n" + thrown);
                     }
                 });
             }
