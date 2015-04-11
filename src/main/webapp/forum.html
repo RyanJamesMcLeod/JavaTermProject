@@ -11,10 +11,8 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/project.css">
         <script src="http://code.jquery.com/jquery.min.js"></script>
-        <script>var getForum = function () {
-//                    function buttonDelete() {
-//                      alert("it works");
-//                    }
+        <script>
+            var getForum = function () {
                 $.ajax({
                     url: "./r/forum",
                     method: "get",
@@ -163,15 +161,10 @@ and open the template in the editor.
             function buttonDelete(id) {
                 $.ajax({
                     url: "./r/forum/" + id,
-                    dataType: "json",
-                    contentType: 'application/json; charset=UTF-8',
                     method: "delete",
                     complete: function () {
                         getForum();
                         getChannel();
-                    },
-                    error: function (jq, status, thrown) {
-                        alert(jq + "\n" + status + "\n" + thrown);
                     }
                 });
             }
