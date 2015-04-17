@@ -18,6 +18,10 @@ table {
     margin-right: auto;
 }
 
+tr, td {
+    border: 1px solid black;
+}
+
 #forum {
     text-align: center;
 }
