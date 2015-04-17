@@ -49,6 +49,7 @@ and open the template in the editor.
                             }
 
                         });
+                        $('#channelname').html(data[i].channel_name);
                     },
                     error: function (jq, status, thrown) {
                         alert(jq + "\n" + status + "\n" + thrown);
