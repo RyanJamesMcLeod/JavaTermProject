@@ -82,6 +82,7 @@ public class Forum implements Serializable {
         if (result == 1) {
             login.setChannelname(channelname);
             SQLString = "CREATE TABLE " + channelname + " (channel_id INT PRIMARY KEY AUTO_INCREMENT, username VARCHAR(255), date DATETIME, information VARCHAR(255))";
+            result = channelPost(SQLString);
             String param = login.getChannelname();
             String user = login.getUsername();
             SQLString = "INSERT INTO " + param + " (username, date, information) VALUES (\"" + user + "\", NOW(),\"This is the first post\")";
@@ -193,38 +194,4 @@ public class Forum implements Serializable {
         }
         return result;
     }
-//    @POST
-//    @Produces("application/json")
-//    @Consumes("application/json")
-//    public Response getAll(JsonObject json) {
-//        JsonArray jsonArray = getResults("SELECT * FROM testchannel");
-//        if (jsonArray.isEmpty())
-//            return Response.status(500).build();
-//        else
-//            return Response.ok(jsonArray).build();
-//
-//    }
-//
-//    public static JsonArray getResults(String sql, String... params) {
-//        JsonArray json = null;
-//        try {
-//            JsonArrayBuilder array = Json.createArrayBuilder();
-//            Connection conn = getConnection();
-//            PreparedStatement pstmt = conn.prepareStatement(sql);
-//            for (int i = 0; i < params.length; i++) {
-//                pstmt.setString(i + 1, params[i]);
-//            }
-//            ResultSet rs = pstmt.executeQuery();
-//            while (rs.next()) {
-//                array.add(Json.createObjectBuilder()
-//                        .add("username", rs.getString("username"))
-//                        .add("password", rs.getString("password")));
-//            }
-//            conn.close();
-//            json = array.build();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return json;
-//    }
 }
