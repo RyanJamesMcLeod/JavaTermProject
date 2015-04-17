@@ -47,8 +47,7 @@ and open the template in the editor.
                             for (var i = 0; i < data.length; i++) {
                                 $('#select').append('<option value="' + data[i].channel_name + '">' + data[i].channel_name + '</option>');
                             }
-                        $('#channelname').html('');
-                        $('#select').append($("#select option:selected").text());
+                        
                         });
                     },
                     error: function (jq, status, thrown) {
@@ -192,7 +191,6 @@ and open the template in the editor.
                 <p><textarea id="text"></textarea></p>
                 <p><button id="submit">Submit</button></p>
             </div>
-            <div id="channelname">testchannel</div>
 
             <div id="forum"></div>
 
