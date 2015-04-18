@@ -9,7 +9,7 @@ import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 
 /**
- *
+ * Bean that is used to store the username and channel name that will be saved as the user's session continues
  * @author Ryan
  */
 @SessionScoped

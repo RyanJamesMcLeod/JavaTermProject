@@ -14,7 +14,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.json.Json;
@@ -38,9 +37,19 @@ import javax.ws.rs.core.Response;
 @SessionScoped
 public class Forum implements Serializable {
 
+    /**
+     * Bean that keeps track of the username and channelname throughout the
+     * session
+     */
     @Inject
     ForumBean login;
 
+    /**
+     * Method that GETs all the information for all the forum posts, then builds
+     * the call from the response
+     *
+     * @return Response.ok(getResults(SQLString)).build();
+     */
     @GET
     @Produces("application/json")
     public Response getAll() {
@@ -49,6 +58,12 @@ public class Forum implements Serializable {
         return Response.ok(getResults(SQLString)).build();
     }
 
+    /**
+     * Method that GETs all the information for all the channels in the
+     * database, then builds the call from the response
+     *
+     * @return Response.ok(getChannels("SELECT * FROM channels")).build();
+     */
     @GET
     @Path("channels")
     @Produces("application/json")
@@ -56,6 +71,12 @@ public class Forum implements Serializable {
         return Response.ok(getChannels("SELECT * FROM channels")).build();
     }
 
+    /**
+     * Inserts into the database the information it takes in as a forum post
+     *
+     * @param json
+     * @return Response.ok(json).build();
+     */
     @POST
     @Produces("application/json")
     @Consumes("application/json")
@@ -71,6 +92,16 @@ public class Forum implements Serializable {
         }
     }
 
+    /**
+     * Method that makes a new channel, based on the channel name that is given.
+     * First it inserts into the channels table (the one that holds all the
+     * names of the channels Second, it will create a new table that is
+     * representative of that channel Finally, it creates a first post for that
+     * database for the data to be read
+     *
+     * @param json
+     * @return Response.ok(json).build();
+     */
     @POST
     @Path("newChannel")
     @Produces("application/json")
@@ -94,7 +125,14 @@ public class Forum implements Serializable {
             return Response.ok(json).build();
         }
     }
-    
+
+    /**
+     * This method will switch the channel bean name to whatever channelname is
+     * consumed to this method
+     *
+     * @param json
+     * @return Response.ok(getChannels("SELECT * FROM channels")).build();
+     */
     @POST
     @Path("switch")
     @Produces("application/json")
@@ -104,6 +142,14 @@ public class Forum implements Serializable {
         return Response.ok(getChannels("SELECT * FROM channels")).build();
     }
 
+    /**
+     * Takes in a SQL string, and converts that information into a JsonObject
+     * that is returned to the main method to be built
+     *
+     * @param sql
+     * @param params
+     * @return json;
+     */
     public static JsonArray getResults(String sql, String... params) {
         JsonArray json = null;
         try {
@@ -128,7 +174,13 @@ public class Forum implements Serializable {
         }
         return json;
     }
-    
+
+    /**
+     * DELETE method that will delete information from the database
+     *
+     * @param id
+     * @return Response.ok().build();
+     */
     @DELETE
     @Path("{id}")
     public Response delete(@PathParam("id") int id) {
@@ -144,6 +196,14 @@ public class Forum implements Serializable {
         return Response.ok().build();
     }
 
+    /**
+     * Method that will get the channel name and return it in a JsonObject to be
+     * used later
+     *
+     * @param sql
+     * @param params
+     * @return json;
+     */
     public static JsonArray getChannels(String sql, String... params) {
         JsonArray json = null;
         try {
@@ -166,6 +226,13 @@ public class Forum implements Serializable {
         return json;
     }
 
+    /**
+     * Method used to get information inserted into the forum channel
+     *
+     * @param sql
+     * @param params
+     * @return result;
+     */
     public static int forumPost(String sql, String... params) {
         int result = -1;
         try {
@@ -182,6 +249,12 @@ public class Forum implements Serializable {
         return result;
     }
 
+    /**
+     * Method used to get information posted into a specific channel
+     *
+     * @param sql
+     * @return result;
+     */
     public static int channelPost(String sql) {
         int result = -1;
         try {

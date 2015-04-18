@@ -12,6 +12,7 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="css/project.css">
         <script src="http://code.jquery.com/jquery.min.js"></script>
         <script>
+            //Gets the data for the forum from the database and posts it into the webpage
             var getForum = function () {
                 $.ajax({
                     url: "./r/forum",
@@ -35,6 +36,8 @@ and open the template in the editor.
                     }
                 });
             };
+            
+            //Gets the data for the channels, then populates the drop down menu with that information
             var getChannel = function () {
                 $.ajax({
                     url: "./r/forum/channels",
@@ -47,7 +50,7 @@ and open the template in the editor.
                             for (var i = 0; i < data.length; i++) {
                                 $('#select').append('<option value="' + data[i].channel_name + '">' + data[i].channel_name + '</option>');
                             }
-                        
+
                         });
                     },
                     error: function (jq, status, thrown) {
@@ -56,17 +59,22 @@ and open the template in the editor.
                 });
             };
             $(document).ready(function () {
+                
+                //Variable used to hide the information in the create new channel section
                 var newChannelShow = 'false';
 
-                
 
+                //Gets the forum and channel information on load, and populates the screen with that
                 getForum();
-
                 getChannel();
+                
+                //Function to take the user to the login screen
                 var logout = function () {
                     window.location.assign("http://termproject-ryanmcleod.rhcloud.com/index.html");
                 };
                 $('#logout').click(logout);
+
+                //Function to post the information that people post in the text area to the database
                 var forumPost = function () {
                     $.ajax({
                         url: "./r/forum",
@@ -84,8 +92,10 @@ and open the template in the editor.
                         }
                     });
                 };
+                //Ties the submit button to the forumPost method
                 $('#submit').click(forumPost);
 
+                //Hides the information in the middle section
                 $('#newChannel').hide();
                 $('#appear').click(function () {
 
@@ -98,7 +108,8 @@ and open the template in the editor.
                         newChannelShow = 'false';
                     }
                 });
-
+                
+                //Function to add a channel to the database
                 var newChannel = function () {
                     $.ajax({
                         url: "./r/forum/newChannel",
@@ -117,9 +128,11 @@ and open the template in the editor.
                         }
                     });
                 };
+                
+                //Tags the newChannel function to the #newChannelConfirm button
                 $('#newChannelConfirm').click(newChannel);
 
-                //New channel sending goes here
+                //Function to switch the channel
                 var switchChannel = function () {
                     $.ajax({
                         url: "./r/forum/switch",
@@ -138,27 +151,11 @@ and open the template in the editor.
                         }
                     });
                 };
+                //Tags the switchChannel function to the #channelChange button
                 $('#channelChange').click(switchChannel);
-
-//                var deleteTest = function() {
-//                    var rowID = $(this).parent().parent().attr('id');
-//                    if (rowID > 0) {
-//                        alert(rowID);
-//                    }
-//                    else {
-//                        alert("not working");
-//                    }
-//                };
-//                $(".button_delete").click(deleteTest);
-
-//                $(".buttonDelete").click(function() {
-//                   alert("It works"); 
-//                });
-
-
-
             });
-
+            
+            //function for each button for deleting the entries of the database
             function buttonDelete(id) {
                 $.ajax({
                     url: "./r/forum/" + id,
@@ -172,12 +169,13 @@ and open the template in the editor.
         </script>
     </head>
     <body>
+        <!--Header Section, has the channel switcher -->
         <div class="outline">
             <h1 class="center">Welcome to the Forums</h1>
             <div class="center"><button id="logout">Logout</button></div>
             <div class="center">Channel: <select id="select"></select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="channelChange">Change to this Channel</button></div>
         </div>
-
+        <!--Channel creating section -->
         <div class="outline">
             <div class="center"><button id="appear">Want to create your own channel? Click here!</button></div>
             <div id="newChannel" class="center">
@@ -185,7 +183,7 @@ and open the template in the editor.
                 <p><button id="newChannelConfirm">Create your new Channel!</button></p>
             </div>
         </div>
-
+        <!--Main section, displays the forum that people post to-->
         <div class="outline center">
             <div>
                 <p><textarea id="text" rows="4" cols="75"></textarea></p>
